@@ -3,8 +3,6 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\MainItemResource;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Models\Item;
 use Illuminate\Support\Facades\Storage;
@@ -14,7 +12,7 @@ class IndexController extends Controller
     public function main()
     {
        $data = Item::query()
-           ->where('parent_id', 0)
+           ->where('parent_id', null)
            ->orderByDesc('id')
            ->limit(1)
            ->get()
@@ -69,8 +67,6 @@ class IndexController extends Controller
             $imageName = time().'.'.$request->image->getClientOriginalExtension();
             $request->image->move(public_path('items'), $imageName);
             $model->image = '/items/'.$imageName;
-        } else {
-            $model->image = $request->image;
         }
         $model->save();
         $data = Item::query()
@@ -82,9 +78,8 @@ class IndexController extends Controller
 
     public function deleteImage($id)
     {
-        $item = Item::find($id);
-//        unlink(mb_substr($item->image, 1));
-        Storage::delete($item->image);
+        $item = Item::query()->find($id);
+        unlink(mb_substr($item->image, 1));
         $item->image = NULL;
         $item->save();
 
@@ -97,5 +92,27 @@ class IndexController extends Controller
             return MainItemResource::collection($data)->resolve();
         }
         return response()->json('Not Found Main', 429);
+    }
+
+    public function delete($id)
+    {
+        $item = Item::query()->where('id', $id);
+        Storage::delete($item->value('image'));
+
+        $data = Item::query()
+            ->where('id', $item->value('parent_id'))
+            ->get()
+            ->values();
+
+        $item->delete();
+
+        if ($data) {
+            return MainItemResource::collection($data)->resolve();
+        }
+        return response()->json('Not Found Main', 429);
+    }
+
+    private function deleteItem($id) {
+        return Item::query()->where('parent_id', $id)->get('id')->values();
     }
 }

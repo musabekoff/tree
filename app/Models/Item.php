@@ -21,4 +21,14 @@ class Item extends Model
             ]
         ];
     }
+
+    public function parents()
+    {
+        return $this->hasMany(Item::class, 'parent_id', 'id');
+    }
+
+    public function childrenParents()
+    {
+        return $this->hasMany(Item::class, 'parent_id', 'id')->with('parents');
+    }
 }

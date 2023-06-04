@@ -30,7 +30,7 @@ class MainItemResource extends JsonResource
     private function backLink($parentId) {
         $main = Item::query()->where('id', $parentId);
 
-        if ($main->value('parent_id') === 0) {
+        if ($main->value('parent_id') === null) {
             return ['slug' => false, 'main' => $main->value('main')];
         } else {
             return ['slug' => $main->value('slug'), 'main' => $main->value('main')];

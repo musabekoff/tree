@@ -11,6 +11,7 @@
                     </div>
                     <router-link class="route__link" :to="{name: 'Item', params: { slug: item.slug}}">Подробнее</router-link>
                     <update :id="item.id" :main="item.main" :spouse="item.spouse" :content="item.content" :image="item.image" :parentId="item.parentId" @imageUpdate="updateData"></update>
+                    <span class="delete__item" @click="deleteItem(item.id)">Удалить</span>
                 </div>
             </div>
             <hr class="hr__line">
@@ -53,6 +54,15 @@ export default {
         },
         updateData(data) {
             this.data = data[0]
+        },
+        deleteItem(id) {
+            axios.get('/api/delete/'+id)
+                .then(res => {
+                    this.data = res.data[0]
+                })
+                .catch(err => {
+                    console.log(err.message)
+                })
         }
     }
 }
