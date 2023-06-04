@@ -395,7 +395,7 @@ section.main-page {
 }
 .add__tree {
     position: absolute;
-    top: -68px;
+    top: -66px;
     left: 50%;
     transform: translateX(-50%);
     padding: 5px 10px;
@@ -418,11 +418,11 @@ a:focus {
 
 a.link__template {
     margin-left: 5px;
-    padding: 3px 15px;
     border: 1px solid #FF9800;
     border-radius: 6px;
     color: #FF9800 !important;
-    font-size: 14px;
+    font-size: 12px;
+    padding: 3px 10px;
 }
 
 .card {
@@ -705,13 +705,24 @@ hr.hr__line {
 .imaged .update_item {
     position: absolute;
     bottom: -22px;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 20px;
     background-color: #FF9800;
     color: #fff;
     font-size: 12px;
     padding: 3px 15px;
     border-radius: 0 0 10px 10px;
+    border: 1px solid #FF9800;
+}
+.imaged .delete__item {
+    position: absolute;
+    bottom: -22px;
+    right: 20px;
+    background-color: #FF5722;
+    color: #fff;
+    font-size: 12px;
+    padding: 3px 15px;
+    border-radius: 0 0 10px 10px;
+    border: 1px solid #FF5722;
 }
 
 .delete__item {
@@ -748,6 +759,7 @@ hr.hr__line {
     }
     .imaged .tree__items {
         padding: 15% 10%;
+        grid-gap: 30px;
     }
 }
 @media (max-width: 750px) {
@@ -758,6 +770,11 @@ hr.hr__line {
 @media (max-width: 520px) {
     .modal__panel {
         width: 300px;
+    }
+    .add__tree {
+        left: auto;
+        right: 80px;
+        transform: none;
     }
 }
 

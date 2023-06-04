@@ -36,7 +36,7 @@
                     </template>
                 </div>
                 <div class="modal__footer">
-                    <button class="add" @click="update">Изменить</button>
+                    <button class="add" @click="update">Сохранить</button>
                 </div>
             </div>
         </div>

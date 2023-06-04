@@ -11,7 +11,7 @@
                     </div>
                     <router-link class="route__link" :to="{name: 'Item', params: { slug: item.slug}}">Подробнее</router-link>
                     <update :id="item.id" :main="item.main" :spouse="item.spouse" :content="item.content" :image="item.image" :parentId="item.parentId" @imageUpdate="updateData"></update>
-                    <span class="delete__item" @click="deleteItem(item.id)">Удалить</span>
+                    <span v-if="isAuth" class="delete__item" @click="deleteItem(item.id)">Удалить</span>
                 </div>
             </div>
             <hr class="hr__line">
@@ -36,11 +36,13 @@ export default {
     components: {Update, Add},
     data: function () {
         return {
-            data: null
+            data: null,
+            isAuth: false
         }
     },
     mounted() {
         this.getMain()
+        this.isAuth = !!this.$cookies.get("isAuth");
     },
     methods: {
         getMain() {

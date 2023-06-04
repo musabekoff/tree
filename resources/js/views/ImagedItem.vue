@@ -11,6 +11,7 @@
                             <div class="tree__items_spouse" v-html="item.spouse"></div>
                         </router-link>
                         <update :id="item.id" :main="item.main" :spouse="item.spouse" :content="item.content" :image="item.image" :parentId="item.parentId" @imageUpdate="updateData"></update>
+                        <span v-if="isAuth" class="delete__item" @click="deleteItem(item.id)">Удалить</span>
                     </div>
                 </template>
             </div>
@@ -47,11 +48,13 @@ export default {
     components: {Update, Add},
     data: function () {
         return {
-            data: null
+            data: null,
+            isAuth: false
         }
     },
     mounted() {
         this.getItem()
+        this.isAuth = !!this.$cookies.get("isAuth");
     },
     methods: {
         getItem() {
@@ -65,6 +68,15 @@ export default {
         },
         updateData(data) {
             this.data = data[0]
+        },
+        deleteItem(id) {
+            axios.get('/api/delete/'+id)
+                .then(res => {
+                    this.data = res.data[0]
+                })
+                .catch(err => {
+                    console.log(err.message)
+                })
         }
     }
 }

@@ -87,6 +87,11 @@ export default {
                     .then(res => {
                         this.$emit('update', res.data)
                         this.isOpen = false
+                        this.form.main = ''
+                        this.form.spouse = ''
+                        this.form.content = ''
+                        this.form.image = ''
+                        this.form.parentId = ''
                     })
                     .catch(err => {
                         console.log(err)
