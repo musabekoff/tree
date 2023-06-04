@@ -63,6 +63,7 @@ class IndexController extends Controller
         $model = Item::find($request->id);
         $model->main = $request->main;
         $model->content = $request->text;
+        $model->slug = null;
         $model->spouse = $request->spouse;
         if ($request->file('image')) {
             $imageName = time().'.'.$request->image->getClientOriginalExtension();
