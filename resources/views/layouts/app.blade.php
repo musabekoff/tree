@@ -34,7 +34,7 @@
     </header>
     @yield('content')
     <footer>
-        asd
+        Разработано в &nbsp;<a href="https://telegram.me/musabekovmg" target="_blank" style="color: #2196F3 !important; font-weight: 600">nello</a>
     </footer>
 </body>
 </html>

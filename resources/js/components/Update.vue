@@ -59,6 +59,7 @@ export default {
         content:null,
         image:null,
         parentId:null,
+        isMain: false
     },
     data: function () {
         return {
@@ -99,10 +100,18 @@ export default {
             formData.append('spouse', this.form.spouse);
             formData.append('text', this.form.content);
             formData.append('parentId', this.form.parentId);
+            formData.append('isMain', this.isMain);
             axios.post('/api/update', formData, config)
                 .then(res => {
                     this.$emit('imageUpdate', res.data)
                     this.isOpen = false
+                    if (res.data[0].parentId) {
+                        if (this.$route.meta.simple) {
+                            this.$router.push({ name: 'Item', params: { slug: res.data[0].slug } })
+                        } else {
+                            this.$router.push({ name: 'ImagedItem', params: { slug: res.data[0].slug } })
+                        }
+                    }
                 })
                 .catch(err => {
                     console.log(err)

@@ -17,10 +17,11 @@
             <hr v-if="data.items.length" class="hr__line">
             <div class="tree__main">
                 <div class="tree__main_image" :style="{'background-image':`url(${data.image})`}"></div>
-                <div class="tree__main_info" :class="data.content ? 'is-info' : ''">
+                <div class="tree__main_info">
                     <div class="tree__main_main" v-html="data.main"></div>
                     <div class="tree__main_spouse" v-html="data.spouse"></div>
                 </div>
+                <update :id="data.id" :main="data.main" :spouse="data.spouse" :content="data.content" :image="data.image" :parentId="data.parentId" :is-main="true" @imageUpdate="updateData"></update>
             </div>
             <div v-if="data.content" class="tree__main_content" v-html="data.content"></div>
             <template v-if="data.back.slug === false">

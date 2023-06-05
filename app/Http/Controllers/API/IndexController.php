@@ -69,10 +69,17 @@ class IndexController extends Controller
             $model->image = '/items/'.$imageName;
         }
         $model->save();
-        $data = Item::query()
-            ->where('id', $request->parentId)
-            ->get()
-            ->values();
+        if ($request->isMain) {
+            $data = Item::query()
+                ->where('id', $request->id)
+                ->get()
+                ->values();
+        } else {
+            $data = Item::query()
+                ->where('id', intval($request->parentId) ? $request->parentId : 1)
+                ->get()
+                ->values();
+        }
         return MainItemResource::collection($data)->resolve();
     }
 

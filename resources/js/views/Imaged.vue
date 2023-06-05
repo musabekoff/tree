@@ -21,6 +21,7 @@
                     <div class="tree__main_main" v-html="data.main"></div>
                     <div class="tree__main_spouse" v-html="data.spouse"></div>
                 </div>
+                <update :id="data.id" :main="data.main" :spouse="data.spouse" :content="data.content" :image="data.image" :parentId="data.parentId" :is-main="true" @imageUpdate="updateData"></update>
             </div>
             <div v-if="data.content" class="tree__main_content" v-html="data.content"></div>
         </div>

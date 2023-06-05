@@ -14,22 +14,34 @@ const routes = [
     {
         path: '/',
         component: Index,
-        name: 'Index'
+        name: 'Index',
+        meta: {
+            simple: true
+        }
     },
     {
         path: '/item/:slug',
         component: Item,
-        name: 'Item'
+        name: 'Item',
+        meta: {
+            simple: true
+        }
     },
     {
         path: '/imaged',
         component: Imaged,
-        name: 'Imaged'
+        name: 'Imaged',
+        meta: {
+            simple: false
+        }
     },
     {
         path: '/imaged/item/:slug',
         component: ImagedItem,
-        name: 'ImagedItem'
+        name: 'ImagedItem',
+        meta: {
+            simple: false
+        }
     },
 
     // and finally the default route, when none of the above matches:

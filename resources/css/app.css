@@ -165,19 +165,23 @@ section.main-page.main {
 .tree__main_image,
 .tree__items_image {
     position: absolute;
-    left: 10px;
-    top: 10px;
-    width: 61px;
-    height: 61px;
+    left: 15px;
+    top: 15px;
+    width: 60px;
+    height: 60px;
     border-radius: 6px;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
 }
+.imaged .tree__main_image {
+    left: 10px;
+    top: 10px;
+}
 .tree__main_info,
 .tree__items_info {
     padding-left: 70px;
-    min-height: 65px;
+    min-height: 60px;
 }
 .tree__main_spouse,
 .tree__items_spouse {
@@ -218,9 +222,7 @@ a.back_link {
     color: #000;
     margin-top: 20px;
     border: 1px solid #efefef;
-}
-.tree__main_info.is-info {
-    min-height: 70px;
+    margin-left: 15px;
 }
 .input__group {
     margin-bottom: 15px;
@@ -288,6 +290,7 @@ a.route__link {
     border-radius: 6px;
     border: 1px solid #efefef;
     color: #000;
+    margin-top: 5px;
 }
 .update_item {
     display: inline-block;
@@ -299,10 +302,15 @@ a.route__link {
     border: 1px solid #FFC107;
     color: #FFC107;
     cursor: pointer;
+    margin-top: 5px;
 }
 hr.hr__line {
     margin: 30px 20px 20px;
     border-top: 1px solid #efefef;
+}
+.imaged .tree__main .update_item {
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .imaged .tree__items {
@@ -327,6 +335,7 @@ hr.hr__line {
     border: 3px solid #93ab33;
     top: -5px;
     border-radius: 200px;
+    height: 86px;
 }
 .imaged .tree__main_image {
     border-radius: 60px;

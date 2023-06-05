@@ -17,13 +17,15 @@ class MainItemResource extends JsonResource
     public function toArray($request): array
     {
         return [
-            'id'      => $this->id,
-            'main'    => $this->main,
-            'spouse'  => $this->spouse,
-            'content' => $this->content,
-            'back'    => $this->backLink($this->parent_id),
-            'image'   => $this->image ? asset($this->image) : '',
-            'items'   => ItemResource::collection(Item::query()->where('parent_id', $this->id)->orderByDesc('id')->get()->values())
+            'id'       => $this->id,
+            'main'     => $this->main,
+            'spouse'   => $this->spouse,
+            'content'  => $this->content,
+            'slug'     => $this->slug,
+            'parentId' => $this->parent_id,
+            'back'     => $this->backLink($this->parent_id),
+            'image'    => $this->image ? asset($this->image) : '',
+            'items'    => ItemResource::collection(Item::query()->where('parent_id', $this->id)->orderByDesc('id')->get()->values())
         ];
     }
 
