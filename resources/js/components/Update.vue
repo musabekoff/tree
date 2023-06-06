@@ -118,7 +118,7 @@ export default {
                 })
         },
         deleteImage() {
-            axios.get('/api/delete-image/'+this.id)
+            axios.get(`/api/delete-image/${this.id}/${this.isMain}`)
                 .then(res => {
                     this.$emit('imageUpdate', res.data)
                     this.form.image = ''

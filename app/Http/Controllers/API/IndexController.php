@@ -56,7 +56,7 @@ class IndexController extends Controller
         return MainItemResource::collection($data)->resolve();
     }
 
-    public function update(Request $request): array
+    public function update(Request $request)
     {
         $model = Item::find($request->id);
         $model->main = $request->main;
@@ -69,31 +69,38 @@ class IndexController extends Controller
             $model->image = '/items/'.$imageName;
         }
         $model->save();
-        if ($request->isMain) {
+        if ($request->isMain === 'true') {
             $data = Item::query()
                 ->where('id', $request->id)
                 ->get()
                 ->values();
         } else {
             $data = Item::query()
-                ->where('id', intval($request->parentId) ? $request->parentId : 1)
+                ->where('id', intval($request->parentId) ? $request->parentId : null)
                 ->get()
                 ->values();
         }
         return MainItemResource::collection($data)->resolve();
     }
 
-    public function deleteImage($id)
+    public function deleteImage($id, $isMain)
     {
         $item = Item::query()->find($id);
         unlink(mb_substr($item->image, 1));
         $item->image = NULL;
         $item->save();
 
-        $data = Item::query()
-            ->where('id', $item->parent_id)
-            ->get()
-            ->values();
+        if ($isMain === 'true') {
+            $data = Item::query()
+                ->where('id', $id)
+                ->get()
+                ->values();
+        } else {
+            $data = Item::query()
+                ->where('id', $item->parent_id)
+                ->get()
+                ->values();
+        }
 
         if ($data) {
             return MainItemResource::collection($data)->resolve();

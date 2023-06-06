@@ -10,13 +10,13 @@
                             <div class="tree__items_main" v-html="item.main"></div>
                             <div class="tree__items_spouse" v-html="item.spouse"></div>
                         </router-link>
-                        <update :id="item.id" :main="item.main" :spouse="item.spouse" :content="item.content" :image="item.image" :parentId="item.parentId" @imageUpdate="updateData"></update>
+                        <update :id="item.id" :main="item.main" :spouse="item.spouse" :content="item.content" :image="item.image" :parentId="item.parentId" :is-main="false" @imageUpdate="updateData"></update>
                         <span v-if="isAuth" class="delete__item" @click="deleteItem(item.id)">Удалить</span>
                     </div>
                 </template>
             </div>
             <div class="tree__main">
-                <div class="tree__main_image" :style="{'background-image':`url(${data.image})`}"></div>
+                <div class="tree__main_image" :style="{'background-image':`url(${data.image ? data.image : 'images/user.png'})`}"></div>
                 <div class="tree__main_info" :class="data.content ? 'is-info' : ''">
                     <div class="tree__main_main" v-html="data.main"></div>
                     <div class="tree__main_spouse" v-html="data.spouse"></div>

@@ -23,5 +23,5 @@ Route::get('/main', [IndexController::class, 'main']);
 Route::get('/item/{slug}', [IndexController::class, 'item']);
 Route::post('/set', [IndexController::class, 'set']);
 Route::post('/update', [IndexController::class, 'update']);
-Route::get('/delete-image/{id}', [IndexController::class, 'deleteImage']);
+Route::get('/delete-image/{id}/{isMain}', [IndexController::class, 'deleteImage']);
 Route::get('/delete/{id}', [IndexController::class, 'delete']);
