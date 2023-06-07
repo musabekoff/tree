@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\MainItemResource;
 use Illuminate\Http\Request;
 use App\Models\Item;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 class IndexController extends Controller
@@ -86,7 +87,7 @@ class IndexController extends Controller
     public function deleteImage($id, $isMain)
     {
         $item = Item::query()->find($id);
-        unlink(mb_substr($item->image, 1));
+        File::delete(mb_substr($item->image, 1));
         $item->image = NULL;
         $item->save();
 
