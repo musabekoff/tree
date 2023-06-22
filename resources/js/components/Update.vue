@@ -86,7 +86,6 @@ export default {
     methods: {
         onImageChange(e){
             this.form.image = e.target.files[0];
-            console.log(e.target.files[0]);
         },
         update: function () {
             const config = {
